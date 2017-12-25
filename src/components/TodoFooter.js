@@ -7,10 +7,14 @@ const todoFooter = ( props ) => {
         return !todo.complete;
     });
 
+    const completeList = props.todoList.filter( todo => {
+        return todo.complete;
+    });
+
     return (
         <div className="TodoFooter">
             <div className="TodoStatus">
-                <span>남은 할 일 {unCompleteList.length} 개</span>
+                <span>완료 {completeList.length}</span> <span> 미완료 { unCompleteList.length }</span>
             </div>
             <div className="TodoFilterGroup">
                 {
