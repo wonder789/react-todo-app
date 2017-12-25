@@ -4,5 +4,5 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App title="Todo App"/>, document.getElementById('root'));
+ReactDOM.render(<App title="할 일 목록"/>, document.getElementById('root'));
 registerServiceWorker();
