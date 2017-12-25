@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TodoHeader, TodoForm } from './components';
+import { TodoHeader, TodoForm, TodoBody, TodoFooter } from './components';
 import { TodoList } from './containers';
 import logo from './logo.svg';
 import './App.css';
@@ -16,10 +16,65 @@ class App extends Component {
 		}
 		this.state = {
 			todoList,
-			todoKind : 'all',
-			todoInput : ''
+			todoInput : '',
+			filterType : 'all',
+			filterGroup : [
+				{
+					type : 'all',
+					name : '전체'
+				},
+				{
+					type : 'complete',
+					name : '완료'
+				},
+				{
+					type : 'uncomplete',
+					name : '미완료'
+				}
+			]
 		};
 
+	}
+
+	todoFilter = ( filterType ) => {
+		let originalList = JSON.parse(localStorage.getItem('todoList'));
+		let todoList     = null;
+
+		if ( filterType === 'all' ){
+			todoList = originalList;
+		} else {
+			todoList = originalList.filter( todo => {
+				return filterType === 'complete' ? todo.complete : !todo.complete;
+			});
+		}
+
+		this.setState({
+			filterType,
+			todoList
+		});
+	}
+
+	todoItemDelete = ( event, index ) => {
+		const todoList = [ ...this.state.todoList ];
+		todoList.splice(index, 1 );
+		this.setState({
+			todoList
+		});
+		localStorage.setItem('todoList', JSON.stringify(todoList));
+	}
+
+	toggleComplete = ( index ) => {
+		const todoList = [ ...this.state.todoList ];
+		const todoItem = todoList[index]
+		todoList[index] = Object.assign( {}, todoItem, {
+			complete : !todoItem.complete
+		});
+
+		this.setState({
+			todoList
+		});
+
+		localStorage.setItem('todoList', JSON.stringify(todoList));
 	}
 
 	todoInputChange = ( event ) => {
@@ -32,7 +87,8 @@ class App extends Component {
 		this.setState({
 			todoList : this.state.todoList.concat({
 				content : this.state.todoInput,
-				id : new Date().toString()
+				id : new Date().toString(),
+				complete : false
 			}),
 			todoInput : ''
 		});
@@ -44,19 +100,23 @@ class App extends Component {
 	render() {
 		return (
 			<div className="TodoApp">
-				<TodoHeader title={ this.props.title }/>
-				<div className="TodoBody">
-					<TodoForm
-						todoInput={this.state.todoInput}
-						todoInputChange={this.todoInputChange}
-						todoSave={this.todoSave}
-					/>
-					<div>
-						<TodoList
-							todoList={this.state.todoList}
-						/>
-					</div>
-				</div>
+				<TodoHeader
+				 	title={ this.props.title }
+				/>
+				<TodoBody
+					todoInput={this.state.todoInput}
+					todoInputChange={this.todoInputChange}
+					todoSave={this.todoSave}
+					todoList={this.state.todoList}
+					todoItemDelete={this.todoItemDelete}
+					toggleComplete={this.toggleComplete}
+				/>
+				<TodoFooter
+					todoList={this.state.todoList}
+					todoFilter={this.todoFilter}
+					filterType={this.state.filterType}
+					filterGroup={this.state.filterGroup}
+				/>
 			</div>
 		);
 	}
