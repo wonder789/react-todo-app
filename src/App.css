@@ -1,0 +1,49 @@
+.TodoApp {
+  width: 60%;
+  margin: 200px auto;
+  -webkit-box-shadow: 1px solid #4b4b4b;
+  box-shadow: 1px 1px 1px #4B4B3A;
+}
+
+.TodoHeader{
+  height: 150px;
+  background: #dc8f80;
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.TodoHeader > h1 {
+  color: #79332b;
+  font-size: 50px;
+}
+
+.TodoForm {
+  display:flex;
+}
+
+.TodoForm > input[type=text]{
+  flex: 1;
+  height: 50px;
+  padding: 3px;
+  font-size: 20px;
+  border: 1px solid #ddd;
+}
+
+.TodoForm > button{
+  color: white;
+  width: 145px;
+  font-size: 18px;
+  background: #ff6957;
+  border: none;
+}
+
+.TodoBody{
+  height: auto;
+  box-sizing: border-box;
+  min-height: 400px;
+}
