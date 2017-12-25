@@ -5,4 +5,4 @@ import TodoForm from './TodoForm';
 import TodoFooter from './TodoFooter';
 import CheckBox from './CheckBox';
 
-export { TodoHeader, TodoForm, TodoItem, TodoFooter, TodoBody };
+export { TodoHeader, TodoForm, TodoItem, TodoFooter, TodoBody, CheckBox };

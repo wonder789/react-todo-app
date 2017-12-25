@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { TodoHeader, TodoForm, TodoBody, TodoFooter } from './components';
-import { TodoList } from './containers';
-import logo from './logo.svg';
+import { TodoHeader, TodoBody, TodoFooter } from './components';
 import './App.css';
 
 class App extends Component {
@@ -14,6 +12,7 @@ class App extends Component {
 		if ( localStorage.getItem('todoList') ){
 			todoList = JSON.parse(localStorage.getItem('todoList'));
 		}
+
 		this.state = {
 			todoList,
 			todoInput : '',
@@ -36,26 +35,18 @@ class App extends Component {
 
 	}
 
+
 	todoFilter = ( filterType ) => {
-		let originalList = JSON.parse(localStorage.getItem('todoList'));
-		let todoList     = null;
-
-		if ( filterType === 'all' ){
-			todoList = originalList;
-		} else {
-			todoList = originalList.filter( todo => {
-				return filterType === 'complete' ? todo.complete : !todo.complete;
-			});
-		}
-
 		this.setState({
-			filterType,
-			todoList
+			filterType
 		});
 	}
 
-	todoItemDelete = ( event, index ) => {
+	todoItemDelete = ( id ) => {
 		const todoList = [ ...this.state.todoList ];
+		const index    = todoList.findIndex( todo => {
+			return todo.id === id;
+		});
 		todoList.splice(index, 1 );
 		this.setState({
 			todoList
@@ -63,8 +54,11 @@ class App extends Component {
 		localStorage.setItem('todoList', JSON.stringify(todoList));
 	}
 
-	toggleComplete = ( index ) => {
+	toggleComplete = ( id ) => {
 		const todoList = [ ...this.state.todoList ];
+		const index    = todoList.findIndex( todo => {
+			return todo.id === id;
+		});
 		const todoItem = todoList[index]
 		todoList[index] = Object.assign( {}, todoItem, {
 			complete : !todoItem.complete
@@ -87,8 +81,9 @@ class App extends Component {
 		this.setState({
 			todoList : this.state.todoList.concat({
 				content : this.state.todoInput,
-				id : new Date().toString(),
-				complete : false
+				id : this.state.todoList.length + 1,
+				complete : false,
+				created : new Date()
 			}),
 			todoInput : ''
 		});
@@ -110,6 +105,7 @@ class App extends Component {
 					todoList={this.state.todoList}
 					todoItemDelete={this.todoItemDelete}
 					toggleComplete={this.toggleComplete}
+					filterType={this.state.filterType}
 				/>
 				<TodoFooter
 					todoList={this.state.todoList}

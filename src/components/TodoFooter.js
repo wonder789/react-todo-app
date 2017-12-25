@@ -19,6 +19,7 @@ const todoFooter = ( props ) => {
                                      clicked={ () => props.todoFilter(obj.type) }
                                      checked={ props.filterType === obj.type }
                                      label={ obj.name }
+                                     key={obj.type}
                                 />;
                     })
                 }

@@ -10,7 +10,8 @@ const todoBody = ( props ) => {
         todoSave,
         todoList,
         todoItemDelete,
-        toggleComplete
+        toggleComplete,
+        filterType
     } = props;
 
     return (
@@ -23,6 +24,7 @@ const todoBody = ( props ) => {
             <div>
                 <TodoList
                     todoList={todoList}
+                    filterType={filterType}
                     todoItemDelete={todoItemDelete}
                     toggleComplete={toggleComplete}
                 />
