@@ -3,7 +3,9 @@ import React from 'react';
 const todoHeader = ( props ) => {
     return (
         <div className="TodoHeader">
-            <h1>{this.props.appTitle}</h1>
+            <h1>{props.title}</h1>
         </div>
     )
 }
+
+export default todoHeader;

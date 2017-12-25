@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
+import { TodoItem } from '../components';
 
-class TodoList extends Component {
+const todoList = ( props ) => {
 
-    render() {
-
-    }
-
+    return (
+            <ul className="TodoList">
+                {
+                    props.todoList.map( (todo, index) => {
+                        return <TodoItem content={todo.content} key={todo.id} />
+                    })
+                }
+            </ul>
+    );
 }
+
+export default todoList;
