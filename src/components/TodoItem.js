@@ -11,6 +11,11 @@ class TodoItem extends Component {
     render() {
         let contentClass = [ 'TodoContent' ];
 
+        let style = {
+            color : this.props.todo.color
+        };
+
+
         const {
             todo,
             toggleComplete,
@@ -22,7 +27,7 @@ class TodoItem extends Component {
         }
 
         return (
-            <li className="TodoItem" >
+            <li className="TodoItem" style={style}>
                 <div className={ contentClass.join(' ')}>
                     <CheckBox
                         clicked={ () => toggleComplete(todo.id) }
