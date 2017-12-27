@@ -1,5 +1,5 @@
 import React from 'react';
-import { TodoForm } from '../components';
+import { TodoForm, Palette } from '../components';
 import { TodoList } from '../containers';
 
 const todoBody = ( props ) => {
@@ -11,15 +11,24 @@ const todoBody = ( props ) => {
         todoList,
         todoItemDelete,
         toggleComplete,
-        filterType
+        filterType,
+        handleColor,
+        colors,
+        currentColor
     } = props;
 
     return (
         <div className="TodoBody">
             <TodoForm
+                currentColor={currentColor}
                 todoInput={todoInput}
                 todoInputChange={todoInputChange}
                 todoSave={todoSave}
+            />
+            <Palette
+                colors={colors}
+                handleColor={handleColor}
+                currentColor={currentColor}
             />
             <div>
                 <TodoList

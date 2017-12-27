@@ -30,7 +30,8 @@ class App extends Component {
 					type : 'uncomplete',
 					name : '미완료'
 				}
-			]
+			],
+			currentColor : '#343a40'
 		};
 
 	}
@@ -39,6 +40,12 @@ class App extends Component {
 	todoFilter = ( filterType ) => {
 		this.setState({
 			filterType
+		});
+	}
+
+	handleColor = ( color ) => {
+		this.setState({
+			currentColor : color
 		});
 	}
 
@@ -83,6 +90,7 @@ class App extends Component {
 				content : this.state.todoInput,
 				id : this.state.todoList.length + 1,
 				complete : false,
+				color : this.state.currentColor,
 				created : new Date()
 			}),
 			todoInput : ''
@@ -93,6 +101,9 @@ class App extends Component {
 
 
 	render() {
+
+		const paletteColors = ['#343a40', '#f03e3e', '#12b886', '#228ae6'];
+
 		return (
 			<div className="TodoApp">
 				<TodoHeader
@@ -106,6 +117,9 @@ class App extends Component {
 					todoItemDelete={this.todoItemDelete}
 					toggleComplete={this.toggleComplete}
 					filterType={this.state.filterType}
+					handleColor={this.handleColor}
+					colors={paletteColors}
+					currentColor={this.state.currentColor}
 				/>
 				<TodoFooter
 					todoList={this.state.todoList}

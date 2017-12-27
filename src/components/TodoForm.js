@@ -1,6 +1,9 @@
 import React from 'react';
 
 const todoForm = ( props ) =>{
+    let style = {
+        color : props.currentColor
+    };
 
     return (
         <div className="TodoForm">
@@ -12,6 +15,7 @@ const todoForm = ( props ) =>{
                 onKeyPress={ (event) => {
                     if( event.key === 'Enter' ) props.todoSave()
                 }}
+                style={style}
             />
         </div>
     )
