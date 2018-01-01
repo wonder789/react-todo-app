@@ -2,7 +2,7 @@
   "name": "todo-list",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://wonder789.github.io/react-todo-app",
+  "homepage" : "https://y0c.github.io/react-todo-app",
   "dependencies": {
     "gh-pages": "^1.1.0",
     "react": "^16.2.0",
